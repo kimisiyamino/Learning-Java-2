@@ -1,0 +1,156 @@
+<html>
+<head>
+<title>Solution.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #ed864a;}
+.s1 { color: #ebebeb;}
+.s2 { color: #ed864a; font-weight: bold;}
+.s3 { color: #54b33e;}
+.s4 { color: #33ccff; font-weight: bold;}
+.s5 { color: #7ec3e6;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Solution.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">java.io.BufferedReader</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java.io.InputStreamReader</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Solution {</span>
+    <span class="s0">public static void </span><span class="s1">main(String[] args) </span><span class="s0">throws </span><span class="s1">Exception {</span>
+        <span class="s0">long </span><span class="s1">startTime = System.currentTimeMillis()</span><span class="s2">;</span>
+
+        <span class="s1">BufferedReader reader = </span><span class="s0">new </span><span class="s1">BufferedReader(</span><span class="s0">new </span><span class="s1">InputStreamReader(System.in))</span><span class="s2">;</span>
+        <span class="s1">ArrayList&lt;String&gt; list = </span><span class="s0">new </span><span class="s1">ArrayList&lt;String&gt;()</span><span class="s2">;</span>
+        <span class="s0">while </span><span class="s1">(</span><span class="s0">true</span><span class="s1">) {</span>
+            <span class="s1">String s = reader.readLine()</span><span class="s2">;</span>
+            <span class="s0">if </span><span class="s1">(s == </span><span class="s0">null </span><span class="s1">|| s.isEmpty()) {</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s1">}</span>
+            <span class="s1">list.add(s)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s3">&quot;Approval Data&quot;</span><span class="s1">)</span><span class="s2">;</span>
+
+        <span class="s1">String[] array = list.toArray(</span><span class="s0">new </span><span class="s1">String[</span><span class="s4">0</span><span class="s1">])</span><span class="s2">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s3">&quot;Sorting......&quot;</span><span class="s1">)</span><span class="s2">;</span>
+
+        <span class="s1">sort(array)</span><span class="s2">;</span>
+        <span class="s1">System.out.println(</span><span class="s3">&quot;Sorting completed!&quot;</span><span class="s1">)</span><span class="s2">;</span>
+
+        <span class="s0">for </span><span class="s1">(String x : array) {</span>
+            <span class="s1">System.out.println(x)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(System.currentTimeMillis() - startTime)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">sort(String[] array) {</span>
+        <span class="s0">boolean</span><span class="s1">[] isNumber = </span><span class="s0">new boolean</span><span class="s1">[array.length]</span><span class="s2">;</span>
+
+        <span class="s0">int </span><span class="s1">numCount = </span><span class="s4">0</span><span class="s2">, </span><span class="s1">strCount = </span><span class="s4">0</span><span class="s2">;</span>
+        <span class="s1">System.out.println(</span><span class="s3">&quot;Getting boolean...&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; array.length</span><span class="s2">; </span><span class="s1">i++) {</span>
+                <span class="s1">isNumber[i] = isNumber(array[i])</span><span class="s2">;</span>
+                <span class="s0">if</span><span class="s1">(isNumber[i]){</span>
+                    <span class="s1">numCount++</span><span class="s2">;</span>
+                <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                    <span class="s1">strCount++</span><span class="s2">;</span>
+                <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s1">System.out.println(</span><span class="s3">&quot;Getting boolean completed!&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">String[] nums = </span><span class="s0">new </span><span class="s1">String[numCount]</span><span class="s2">;</span>
+        <span class="s1">String[] strings = </span><span class="s0">new </span><span class="s1">String[strCount]</span><span class="s2">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s3">&quot;Array splitting...&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">numCount = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">strCount = </span><span class="s4">0</span><span class="s2">;</span>
+        <span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; isNumber.length</span><span class="s2">; </span><span class="s1">i++) {</span>
+            <span class="s0">if</span><span class="s1">(isNumber[i]){</span>
+                <span class="s1">nums[numCount] = array[i]</span><span class="s2">;</span>
+                <span class="s1">numCount++</span><span class="s2">;</span>
+            <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                <span class="s1">strings[strCount] = array[i]</span><span class="s2">;</span>
+                <span class="s1">strCount++</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s1">System.out.println(</span><span class="s3">&quot;Array splitting completed!&quot;</span><span class="s1">)</span><span class="s2">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s3">&quot;Sorting strings...&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s0">boolean </span><span class="s1">sorted = </span><span class="s0">false</span><span class="s2">;</span>
+        <span class="s0">while </span><span class="s1">(!sorted) {</span>
+            <span class="s1">sorted = </span><span class="s0">true</span><span class="s2">;</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; strings.length - </span><span class="s4">1</span><span class="s2">; </span><span class="s1">i++) {</span>
+                <span class="s0">boolean </span><span class="s1">comp = isGreaterThan(strings[i]</span><span class="s2">, </span><span class="s1">strings[i + </span><span class="s4">1</span><span class="s1">])</span><span class="s2">;</span>
+                <span class="s0">if </span><span class="s1">(comp) {</span>
+                    <span class="s1">String t = strings[i]</span><span class="s2">;</span>
+                    <span class="s1">strings[i] = strings[i + </span><span class="s4">1</span><span class="s1">]</span><span class="s2">;</span>
+                    <span class="s1">strings[i + </span><span class="s4">1</span><span class="s1">] = t</span><span class="s2">;</span>
+                    <span class="s1">sorted = </span><span class="s0">false</span><span class="s2">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s1">System.out.println(</span><span class="s3">&quot;Sorting strings completed!&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">System.out.println(</span><span class="s3">&quot;Sorting nums...&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">sorted = </span><span class="s0">false</span><span class="s2">;</span>
+        <span class="s0">while </span><span class="s1">(!sorted) {</span>
+            <span class="s1">sorted = </span><span class="s0">true</span><span class="s2">;</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; nums.length - </span><span class="s4">1</span><span class="s2">; </span><span class="s1">i++) {</span>
+                <span class="s0">int </span><span class="s1">GG1 =Integer.parseInt(nums[i])</span><span class="s2">;</span>
+                <span class="s0">int </span><span class="s1">GG2 = Integer.parseInt(nums[i+</span><span class="s4">1</span><span class="s1">])</span><span class="s2">;</span>
+                <span class="s0">if </span><span class="s1">(GG1 &lt; GG2) {</span>
+                    <span class="s1">String t = nums[i]</span><span class="s2">;</span>
+                    <span class="s1">nums[i] = nums[i + </span><span class="s4">1</span><span class="s1">]</span><span class="s2">;</span>
+                    <span class="s1">nums[i + </span><span class="s4">1</span><span class="s1">] = t</span><span class="s2">;</span>
+                    <span class="s1">sorted = </span><span class="s0">false</span><span class="s2">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s1">System.out.println(</span><span class="s3">&quot;Sorting nums completed!&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">System.out.println(</span><span class="s3">&quot;Restore original data...&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">numCount = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">strCount = </span><span class="s4">0</span><span class="s2">;</span>
+        <span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; array.length</span><span class="s2">; </span><span class="s1">i++){</span>
+            <span class="s0">if</span><span class="s1">(isNumber[i]){</span>
+                <span class="s1">array[i] = nums[numCount]</span><span class="s2">;</span>
+                <span class="s1">numCount++</span><span class="s2">;</span>
+            <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                <span class="s1">array[i] = strings[strCount]</span><span class="s2">;</span>
+                <span class="s1">strCount++</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s1">System.out.println(</span><span class="s3">&quot;Restore original data completed!&quot;</span><span class="s1">)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s5">// Метод для сравнения строк: 'а' больше чем 'b'</span>
+    <span class="s0">public static boolean </span><span class="s1">isGreaterThan(String a</span><span class="s2">, </span><span class="s1">String b) {</span>
+        <span class="s0">return </span><span class="s1">a.compareTo(b) &gt; </span><span class="s4">0</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+
+    <span class="s5">// Переданная строка - это число?</span>
+    <span class="s0">public static boolean </span><span class="s1">isNumber(String s) {</span>
+        <span class="s0">if </span><span class="s1">(s.length() == </span><span class="s4">0</span><span class="s1">) {</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">char</span><span class="s1">[] chars = s.toCharArray()</span><span class="s2">;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; chars.length</span><span class="s2">; </span><span class="s1">i++) {</span>
+            <span class="s0">char </span><span class="s1">c = chars[i]</span><span class="s2">;</span>
+            <span class="s0">if </span><span class="s1">((i != </span><span class="s4">0 </span><span class="s1">&amp;&amp; c == </span><span class="s3">'-'</span><span class="s1">) </span><span class="s5">// Строка содержит '-'</span>
+                    <span class="s1">|| (!Character.isDigit(c) &amp;&amp; c != </span><span class="s3">'-'</span><span class="s1">) </span><span class="s5">// или не цифра и не начинается с '-'</span>
+                    <span class="s1">|| (chars.length == </span><span class="s4">1 </span><span class="s1">&amp;&amp; c == </span><span class="s3">'-'</span><span class="s1">)) </span><span class="s5">// или одиночный '-'</span>
+            <span class="s1">{</span>
+                <span class="s0">return false</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s0">return true</span><span class="s2">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
